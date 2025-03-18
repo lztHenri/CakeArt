@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CakeArt | Confeitaria Artesanal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    :root {
+      --primary: #d63384;
+      --primary-light: #ffd8e2;
+      --primary-dark: #a82d66;
+      --bg-color: #fff7fc;
+      --text-color: #333;
+      --user-msg: #e0f4d7;
+      --bot-msg: #ffd8e2;
+      --shadow: 0 4px 12px rgba(214, 51, 132, 0.15);
+      --border-radius: 12px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      min-height: 100vh;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      background-color: white;
+      box-shadow: var(--shadow);
+      padding: 15px 20px;
+      position: relative;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo i {
+      font-size: 2rem;
+      color: var(--primary);
+    }
+
+    .logo h1 {
+      font-size: 1.8rem;
+      color: var(--primary);
+      margin: 0;
+    }
+
+    .social-links a {
+      color: var(--primary);
+      font-size: 1.5rem;
+      margin-left: 15px;
+      transition: transform 0.3s, color 0.3s;
+    }
+
+    .social-links a:hover {
+      color: var(--primary-dark);
+      transform: scale(1.1);
+    }
+
+    .container {
+      max-width: 1000px;
+      width: 100%;
+      margin: 30px auto;
+      padding: 0 20px;
+      flex: 1;
+    }
+
+    .chat-section {
+      background-color: white;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .chat-header {
+      background-color: var(--primary);
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .chat-header h2 {
+      font-size: 1.2rem;
+      font-weight: 500;
+      margin: 0;
+    }
+
+    #chat-box {
+      height: 400px;
+      overflow-y: auto;
+      padding: 20px;
+      background-color: white;
+      scroll-behavior: smooth;
+    }
+
+    #chat-box p {
+      margin: 10px 0;
+      padding: 12px 15px;
+      border-radius: 18px;
+      max-width: 80%;
+      line-height: 1.4;
+      position: relative;
+      animation: fadeInUp 0.5s forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .user-msg {
+      background-color: var(--user-msg);
+      text-align: right;
+      margin-left: auto;
+      border-radius: 18px 18px 4px 18px;
+    }
+
+    .bot-msg {
+      background-color: var(--bot-msg);
+      text-align: left;
+      margin-right: auto;
+      border-radius: 18px 18px 18px 4px;
+    }
+
+    .chat-input {
+      display: flex;
+      padding: 15px;
+      background-color: #f9f9f9;
+      border-top: 1px solid #eee;
+    }
+
+    #user-input {
+      flex: 1;
+      border: 1px solid #ddd;
+      border-radius: 24px;
+      padding: 12px 20px;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    #user-input:focus {
+      border-color: var(--primary-light);
+      box-shadow: 0 0 0 3px rgba(214, 51, 132, 0.1);
+    }
+
+    #send-btn {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      margin-left: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    #send-btn:hover {
+      background-color: var(--primary-dark);
+      transform: scale(1.05);
+    }
+
+    #send-btn:active {
+      transform: scale(0.95);
+    }
+
+    .footer {
+      text-align: center;
+      padding: 20px;
+      color: #777;
+      font-size: 0.85rem;
+      background-color: white;
+      margin-top: auto;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+    }
+
+    /* Responsividade */
+    @media (max-width: 600px) {
+      .logo h1 {
+        font-size: 1.5rem;
+      }
+      
+      #chat-box p {
+        max-width: 85%;
+      }
+      
+      .container {
+        margin: 15px auto;
+      }
+      
+      #chat-box {
+        height: 350px;
+      }
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+  <header class="header">
+    <div class="header-content">
+      <div class="logo">
+        <i class="fas fa-birthday-cake"></i>
+        <h1>CakeArt</h1>
+      </div>
+      <div class="social-links">
+        <a href="https://www.instagram.com/patricialorenzeto" target="_blank" title="Siga-nos no Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://api.whatsapp.com/message/XPLEQ5EWHARON1?autoload=1&app_absent=0" target="_blank" title="Nosso WhatsApp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="chat-section">
+      <div class="chat-header">
+        <i class="fas fa-comment-dots"></i>
+        <h2>Atendimento Online</h2>
+      </div>
+      
+      <div id="chat-box">
+        <!-- As mensagens serão adicionadas aqui -->
+        <p class="bot-msg"><strong>CakeArt:</strong> Olá! Seja bem-vindo(a) à CakeArt! Como posso ajudar você hoje? 🍰</p>
+      </div>
+      
+      <div class="chat-input">
+        <input type="text" id="user-input" placeholder="Digite sua mensagem..." autocomplete="off">
+        <button id="send-btn">
+          <i class="fas fa-paper-plane"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>&copy; 2025 CakeArt - Ateliê | Todos os direitos reservados</p>
+  </footer>
+
+  <script>
+    $(document).ready(function() {
+      function addMessage(message, sender) {
+        var messageClass = sender === 'user' ? 'user-msg' : 'bot-msg';
+        var messageElement = $("<p class='" + messageClass + "'><strong>" + (sender === 'user' ? 'Você' : 'CakeArt') + ":</strong> " + message + "</p>");
+        $("#chat-box").append(messageElement);
+        $("#chat-box").scrollTop($("#chat-box")[0].scrollHeight);
+      }
+      
+      $("#send-btn").click(function() {
+        var message = $("#user-input").val();
+        if (message.trim() === "") return;
+        addMessage(message, 'user');
+        
+        $.post("/chat", { message: message }, function(data) {
+          addMessage(data.resposta, 'bot');
+          $("#user-input").val("");
+        });
+      });
+      
+      // Enviar mensagem ao pressionar Enter
+      $("#user-input").on("keypress", function(e) {
+        if (e.which === 13) {
+          $("#send-btn").click();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
